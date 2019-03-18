@@ -10,6 +10,13 @@
 	
 	<body><h1>Audioblog header</h1>
 		<img th:src="@{/images/banner.jpg}"/>
+	
+		<div th:each="Post : ${wrap}">
+					<input name="ingredients" type="checkbox"
+						th:value="${post.title}" /> 
+						<span th:text="${post.text}">TEXT</span><br />
+		</div>
+	
 	</body>
 	
 </html>
