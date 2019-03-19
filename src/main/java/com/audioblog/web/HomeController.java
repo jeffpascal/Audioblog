@@ -1,7 +1,14 @@
 package com.audioblog.web;
 
+import java.util.LinkedList;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.audioblog.PostComponent;
+import com.audioblog.WallComponent;
 
 //Because HomeController is annotated with @Controller, 
 //Spring’s component scanning automatically discovers it and creates an 
@@ -11,8 +18,22 @@ public class HomeController {
 	
 	//HTTP GET request is received for the root path /, then this method handles that request
 	@GetMapping("/")
-	public String home(){
+	public String home(Model model){
+		WallComponent wall = new WallComponent();
+		LinkedList<PostComponent> postList = wall.getPostList();
+		
+		for(PostComponent post : postList){
+			model.addAttribute(post.getTitle(), post.getText());
+		}
+		
+		
 		return "home";
+	}
+	
+	@PostMapping
+	public String postPage(){
+		
+		return "post";
 	}
 	
 }
