@@ -8,12 +8,9 @@ public class WallComponent {
 		super();
 		this.postList = postList;
 	}
-	public WallComponent() {
-		super();
-		this.postList = new LinkedList<PostComponent>();
-	}
+	
 
-	LinkedList<PostComponent> postList;
+	static public LinkedList<PostComponent> postList;
 	
 	
 	public LinkedList<PostComponent> getPostList() {

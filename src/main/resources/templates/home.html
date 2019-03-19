@@ -11,10 +11,10 @@
 	<body><h1>Audioblog header</h1>
 		<img th:src="@{/images/banner.jpg}"/>
 	
-			<div th:each="Post : ${post}">
+			<div th:each="Post : ${Status}">
 					<input name="postList" type="checkbox"
 						th:value="${title}" /> 
-						<span th:text="${postList.text}">TEXT</span><br />
+						<span th:text="${Status}">TEXT</span><br />
 			</div>
 	
 	</body>

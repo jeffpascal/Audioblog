@@ -19,13 +19,14 @@ public class HomeController {
 	//HTTP GET request is received for the root path /, then this method handles that request
 	@GetMapping("/")
 	public String home(Model model){
-		WallComponent wall = new WallComponent();
-		LinkedList<PostComponent> postList = wall.getPostList();
 		
+		LinkedList<PostComponent> postList = WallComponent.postList;
+		System.out.println(postList);
 		for(PostComponent post : postList){
 			model.addAttribute(post.getTitle(), post.getText());
 		}
 		
+		System.out.println(model.toString());
 		
 		return "home";
 	}

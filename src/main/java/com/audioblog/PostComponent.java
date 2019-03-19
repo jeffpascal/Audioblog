@@ -38,4 +38,8 @@ public class PostComponent {
 	public void setComments(LinkedList<CommentsComponent> comments) {
 		this.comments = comments;
 	}
+	@Override
+	public String toString() {
+		return "PostComponent [text=" + text + ", title=" + title + ", date=" + date + ", comments=" + comments + "]";
+	}
 }
