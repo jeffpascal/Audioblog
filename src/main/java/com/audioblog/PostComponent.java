@@ -4,12 +4,13 @@ import java.sql.Date;
 import java.util.LinkedList;
 
 public class PostComponent {
-	public PostComponent(String text, String title, Date date) {
+	public PostComponent(String text, String title, Date date, String id) {
 		super();
 		this.text = text;
 		this.title = title;
 		this.date = date;
 	}
+	private String id;
 	private String text;
 	private String title;
 	private Date date;
@@ -41,5 +42,11 @@ public class PostComponent {
 	@Override
 	public String toString() {
 		return "PostComponent [text=" + text + ", title=" + title + ", date=" + date + ", comments=" + comments + "]";
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }
