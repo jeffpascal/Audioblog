@@ -4,16 +4,14 @@ package com.audioblog;
 import java.util.LinkedList;
 
 public class WallComponent {
+	
 	public WallComponent(LinkedList<PostComponent> postList) {
 		super();
 		this.postList = postList;
 	}
-	public WallComponent() {
-		super();
-		this.postList = new LinkedList<PostComponent>();
-	}
+	
 
-	LinkedList<PostComponent> postList;
+	public LinkedList<PostComponent> postList;
 	
 	
 	public LinkedList<PostComponent> getPostList() {
