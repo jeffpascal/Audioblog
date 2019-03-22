@@ -1,4 +1,4 @@
-package com.audioblog;
+package com.audioblog.user;
 
 
 import java.util.LinkedList;

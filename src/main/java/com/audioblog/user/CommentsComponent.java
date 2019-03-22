@@ -1,4 +1,4 @@
-package com.audioblog;
+package com.audioblog.user;
 
 public class CommentsComponent {
 	private String name;

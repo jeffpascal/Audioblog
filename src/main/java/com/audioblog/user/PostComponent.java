@@ -1,4 +1,4 @@
-package com.audioblog;
+package com.audioblog.user;
 
 import java.sql.Date;
 import java.util.LinkedList;
