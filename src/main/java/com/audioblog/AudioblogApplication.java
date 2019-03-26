@@ -10,9 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AudioblogApplication {
 
 	public static void main(String[] args) {
-		
-		
-		
 		SpringApplication.run(AudioblogApplication.class, args);
 	}
 

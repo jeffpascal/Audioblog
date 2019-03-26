@@ -3,18 +3,32 @@ package com.audioblog.user;
 import java.sql.Date;
 import java.util.LinkedList;
 
-public class PostComponent {
-	public PostComponent(String text, String title, Date date, String id) {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
+
+public class Post {
+	
+	@Id
+	private Integer id;
+	
+	private String text;
+	private String title;
+	private Date date;
+	
+	@Autowired
+	private LinkedList<Comment> comments;
+	
+	public Post(String text, String title, Date date, String id) {
 		super();
 		this.text = text;
 		this.title = title;
 		this.date = date;
 	}
-	private String id;
-	private String text;
-	private String title;
-	private Date date;
-	private LinkedList<CommentsComponent> comments;
+	
+	public Post() {
+		
+	}
+	
 	public String getText() {
 		return text;
 	}
@@ -33,20 +47,20 @@ public class PostComponent {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public LinkedList<CommentsComponent> getComments() {
+	public LinkedList<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(LinkedList<CommentsComponent> comments) {
+	public void setComments(LinkedList<Comment> comments) {
 		this.comments = comments;
 	}
 	@Override
 	public String toString() {
 		return "PostComponent [text=" + text + ", title=" + title + ", date=" + date + ", comments=" + comments + "]";
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 }
