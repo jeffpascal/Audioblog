@@ -1,66 +1,87 @@
 package com.audioblog.user;
 
-import java.sql.Date;
-import java.util.LinkedList;
+import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-public class Post {
-	
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+@Entity
+public class Post{
 	@Id
-	private Integer id;
-	
-	private String text;
+	private int id;
+	private String content;
 	private String title;
-	private Date date;
 	
-	@Autowired
-	private LinkedList<Comment> comments;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore // to prevent error from one getting the info from another
+	private User user;
 	
-	public Post(String text, String title, Date date, String id) {
+	
+	public Post(){	
+	}
+	
+	public Post(int id, String content, String title, User user, Date date) {
 		super();
-		this.text = text;
+		this.id = id;
+		this.content = content;
 		this.title = title;
+		this.user = user;
 		this.date = date;
 	}
-	
-	public Post() {
-		
-	}
-	
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public LinkedList<Comment> getComments() {
-		return comments;
-	}
-	public void setComments(LinkedList<Comment> comments) {
-		this.comments = comments;
-	}
+
 	@Override
 	public String toString() {
-		return "PostComponent [text=" + text + ", title=" + title + ", date=" + date + ", comments=" + comments + "]";
+		return "Post [id=" + id + ", content=" + content + ", title=" + title + ", user=" + user + ", date=" + date
+				+ "]";
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	private Date date;
+	
+	
+	
 }
