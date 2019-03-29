@@ -1,6 +1,7 @@
 package com.audioblog.user;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,6 +93,24 @@ public class UserController {
 				.toUri();
 		
 		return ResponseEntity.created(location).build();
+	}
+	
+	@GetMapping("posts/searchbytitle/{title}")
+	public ArrayList<Post> getPostByTitle(@PathVariable String title) throws Exception {
+		
+		ArrayList<Post> wantedPosts = new ArrayList<Post>();
+		List<Post> posts = postService.findAll();
+		for(Post post : posts){
+			if(post.getTitle().contains(title)) {
+				wantedPosts.add(post);
+			}
+		}
+		System.out.println(wantedPosts);
+		if(wantedPosts.isEmpty()) {
+			throw new Exception("No posts by that name");
+		}
+		
+		return wantedPosts;
 	}
 
 	
