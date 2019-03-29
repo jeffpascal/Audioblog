@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,15 @@ public class UserController {
 		return userService.findAll();
 	}
 	
+	@GetMapping(path = "/users/{id}")
+	public User getUser(@PathVariable int id) {
+		Optional<User> foundUser = userService.findById(id);
+		
+		if(!foundUser.isPresent())
+			throw new UsernameNotFoundException("user not found with id " + id);
+		
+		return foundUser.get();
+	}
 	
 	@GetMapping(path="/posts")
 	public List<Post> getAllPosts(){
