@@ -1,11 +1,13 @@
 package com.audioblog.user;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +33,15 @@ public class UserController {
 		return userService.findAll();
 	}
 	
+	@GetMapping(path = "/users/{id}")
+	public User getUser(@PathVariable int id) {
+		Optional<User> foundUser = userService.findById(id);
+		
+		if(!foundUser.isPresent())
+			throw new UsernameNotFoundException("user not found with id " + id);
+		
+		return foundUser.get();
+	}
 	
 	@GetMapping(path="/posts")
 	public List<Post> getAllPosts(){
@@ -82,6 +93,24 @@ public class UserController {
 				.toUri();
 		
 		return ResponseEntity.created(location).build();
+	}
+	
+	@GetMapping("posts/searchbytitle/{title}")
+	public ArrayList<Post> getPostByTitle(@PathVariable String title) throws Exception {
+		
+		ArrayList<Post> wantedPosts = new ArrayList<Post>();
+		List<Post> posts = postService.findAll();
+		for(Post post : posts){
+			if(post.getTitle().contains(title)) {
+				wantedPosts.add(post);
+			}
+		}
+		System.out.println(wantedPosts);
+		if(wantedPosts.isEmpty()) {
+			throw new Exception("No posts by that name");
+		}
+		
+		return wantedPosts;
 	}
 
 	
